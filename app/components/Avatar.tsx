@@ -3,6 +3,7 @@
 import { User } from "@prisma/client";
 import Image from "next/image";
 import useActiveList from "../hooks/useActiveList";
+import { memo } from "react";
 
 interface AvatarProps {
   user?: User;
@@ -20,6 +21,7 @@ const Avatar: React.FC<AvatarProps> = ({ user }) => {
           src={user?.image || "/images/placeholder.jpg"}
           className="object-cover"
           fill
+          sizes="100vw"
         />
       </div>
       {isActive && (
@@ -29,4 +31,4 @@ const Avatar: React.FC<AvatarProps> = ({ user }) => {
   );
 };
 
-export default Avatar;
+export default memo(Avatar);

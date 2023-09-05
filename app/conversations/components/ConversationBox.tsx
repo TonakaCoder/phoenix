@@ -1,17 +1,17 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { format } from "date-fns";
 import clsx from "clsx";
 
-import { Conversation, Message, User } from "@prisma/client";
 import { FullConversationType } from "@/app/types";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import Avatar from "@/app/components/Avatar";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import DynamicAvatar from "@/app/components/DynamicAvatar";
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -66,12 +66,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
-      {data.inGroup ? (
-        <AvatarGroup users={data.users} />
-      ) : (
-        <Avatar user={otherUser} />
-      )}
-
+      <DynamicAvatar conversation={data} user={otherUser} />
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="flex justify-between items-center mb-1">
@@ -98,4 +93,4 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
   );
 };
 
-export default ConversationBox;
+export default memo(ConversationBox);

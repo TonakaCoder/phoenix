@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import { memo, useState } from "react";
 import ImageModal from "./ImageModal";
 
 interface MessageBoxProps {
@@ -77,4 +77,4 @@ const MessageBox: React.FC<MessageBoxProps> = ({ isLast, data }) => {
   );
 };
 
-export default MessageBox;
+export default memo(MessageBox);

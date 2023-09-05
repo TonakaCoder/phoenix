@@ -1,11 +1,12 @@
 "use client";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import axios from "axios";
 import Avatar from "@/app/components/Avatar";
 import LoadingModal from "@/app/components/modals/LoadingModal";
 import useActiveList from "@/app/hooks/useActiveList";
+import { isActive } from "@/app/libs/isActive";
 
 interface UserBoxProps {
   data: User;
@@ -14,8 +15,6 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { members } = useActiveList();
-
-  const isActive = members.indexOf(data?.email!) !== -1;
 
   const handleClick = useCallback(() => {
     setIsLoading(true);
@@ -39,7 +38,7 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm font-medium text-gray-900">{data.name}</p>
               <p className="text-xs  text-gray-400">
-                {isActive ? "Active" : "Offline"}
+                {isActive(members, data?.email!)}
               </p>
             </div>
           </div>
@@ -49,4 +48,4 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
   );
 };
 
-export default UserBox;
+export default memo(UserBox);

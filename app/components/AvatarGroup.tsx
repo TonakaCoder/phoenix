@@ -2,6 +2,7 @@
 
 import { User } from "@prisma/client";
 import Image from "next/image";
+import { memo } from "react";
 
 interface AvatarGroupProps {
   users?: User[];
@@ -30,6 +31,7 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ users = [] }) => {
             alt="AvatarGroup"
             className="object-cover"
             fill
+            sizes="100vw"
           />
         </div>
       ))}
@@ -37,4 +39,4 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ users = [] }) => {
   );
 };
 
-export default AvatarGroup;
+export default memo(AvatarGroup);

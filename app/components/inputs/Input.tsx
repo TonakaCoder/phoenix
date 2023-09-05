@@ -25,12 +25,12 @@ const Input: React.FC<InputProps> = ({
   return (
     <>
       <label
-        className="block text-sm font-medium leading-6 text-gray-600"
+        className="block text-sm font-medium leading-6 text-gray-900"
         htmlFor={id}
       >
         {label}
       </label>
-      <div className="mt-2">
+      <div className="mt-1">
         <input
           id={id}
           type={type}

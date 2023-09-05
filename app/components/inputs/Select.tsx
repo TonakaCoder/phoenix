@@ -32,6 +32,7 @@ const Select: React.FC<SelectProps> = ({
       </label>
       <div className="mt-2">
         <ReactSelect
+          id={label}
           isDisabled={disabled}
           value={value}
           onChange={onChange}

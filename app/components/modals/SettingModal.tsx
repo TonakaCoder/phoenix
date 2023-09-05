@@ -79,7 +79,7 @@ const SettingModal: React.FC<SettingModalProps> = ({
               Edit your public information.
             </p>
 
-            <div className="mt-10 flex flex-col gap-y-8">
+            <div className="mt-10 flex flex-col gap-y-2">
               <Input
                 disabled={isLoading}
                 label="Name"
@@ -88,6 +88,9 @@ const SettingModal: React.FC<SettingModalProps> = ({
                 required
                 register={register}
               />
+            </div>
+
+            <div className="mt-10 flex flex-col gap-y-8">
               <div>
                 <label
                   htmlFor="photo"
@@ -116,9 +119,9 @@ const SettingModal: React.FC<SettingModalProps> = ({
                     onUpload={handleUpload}
                     uploadPreset="wrgc4mnd"
                   >
-                    <Button disabled={isLoading} secondary type="button">
+                    <span className="flex justify-center rounded-md px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                       Change
-                    </Button>
+                    </span>
                   </CldUploadButton>
                 </div>
               </div>
