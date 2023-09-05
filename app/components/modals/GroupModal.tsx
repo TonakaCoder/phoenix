@@ -47,7 +47,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
     axios
       .post("/api/conversations", {
         ...data,
-        isGroup: true,
+        inGroup: true,
       })
       .then(() => {
         router.refresh();

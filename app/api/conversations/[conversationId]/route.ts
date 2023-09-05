@@ -1,12 +1,13 @@
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import { NextResponse } from 'next/server';
 import prisma from '@/app/libs/prismadb';
-import { isConstructorDeclaration } from 'typescript';
+import { pusherServer } from '@/app/libs/pusher';
 
 interface IParams {
     conversationId?: string;
 }
 
+//Params are a second argument and they need to be second in this list.
 export async function DELETE(request: Request, { params }: { params: IParams }) {
     try {
         const { conversationId } = params;
@@ -35,6 +36,12 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
                 userIds: {
                     hasSome: [currentUser.id]
                 }
+            }
+        })
+
+        existingConversation.users.forEach(user => {
+            if (user.email) {
+                pusherServer.trigger(user.email, "conversation:remove", existingConversation)
             }
         })
 
