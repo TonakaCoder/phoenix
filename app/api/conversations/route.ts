@@ -94,9 +94,9 @@ export async function POST(
             }
         })
 
-        newConversation.users.map(user => {
+        newConversation.users.map(async user => {
             if (user.email) {
-                pusherServer.trigger(user.email, "conversation:new", newConversation);
+                await pusherServer.trigger(user.email, "conversation:new", newConversation);
             }
         })
 
